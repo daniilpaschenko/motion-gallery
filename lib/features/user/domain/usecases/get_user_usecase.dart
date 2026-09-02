@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/error/failures.dart';
-import '../../domain/entities/user_entity.dart';
+import '../entities/user_entity.dart';
 import '../interfaces/user_interface.dart';
 
 @injectable
