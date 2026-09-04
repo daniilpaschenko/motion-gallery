@@ -4,9 +4,9 @@ import '../../../../core/error/failures.dart';
 import '../interfaces/user_interface.dart';
 
 @injectable
-class ChangeUserNameUsecase {
+class ChangeUserNameUseCase {
     final UserInterface _repository;
-    const ChangeUserNameUsecase(this._repository);
+    const ChangeUserNameUseCase(this._repository);
 
     Future<Either<Failure, void>> call(String name) => _repository.changeUserName(name);
 }
