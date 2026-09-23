@@ -11,5 +11,8 @@ class AppColors {
 
   // Icons
   static const Color iconColor = Colors.white70;
+
+  // Shades of white
+  static const Color white90 = Color(0xE6FFFFFF);
   
 }
