@@ -15,7 +15,9 @@ class AppDimens {
 
   static const double appBarHeight = 64.0;
   static const double iconButtonSize = 22.0;
+
   static const double tightLetterSpacing = -0.5;
+  static const double wideLetterSpacing = 1.6;
 
   static const Color borderColor = Colors.white12;
 
@@ -50,6 +52,11 @@ class AppDimens {
 
   static double detailFontSize(BuildContext context) =>
       MediaQuery.of(context).size.width > 600 ? 15.0 : 13.5;
+
+  static double sectionTitleFontSize(BuildContext context) =>
+      MediaQuery.of(context).size.width > 600 ? 13.5 : 12;
+
+  static const sectionTitlePadding = 4.0;
 
   static const badgeGap = SizedBox(width: 10);
   static const badgeGapSmall = SizedBox(width: 6);
