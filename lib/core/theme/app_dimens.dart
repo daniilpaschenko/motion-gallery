@@ -72,7 +72,7 @@ class AppDimens {
       MediaQuery.of(context).size.width > 600 ? 36.0 : 24.0;
 
   static double verticalPaddingBottom(BuildContext context) =>
-      MediaQuery.of(context).size.width > 600 ? 180.0 : 120.0;
+      MediaQuery.of(context).size.width > 600 ? 150.0 : 120.0;
 
   // --- Generic nav/toggle row (danger_zone, security_card, preferences_card) ---
   static double rowPadding(BuildContext context) =>
