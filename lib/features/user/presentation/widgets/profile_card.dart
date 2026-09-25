@@ -103,16 +103,16 @@ class ProfileCard extends StatelessWidget {
                 children: [
                   // temporary
                   _StatBadge(
-                    icon: Icons.favorite,
-                    value: '48',
-                    label: 'Favorites',
+                    icon: Icons.folder_special,
+                    value: '3',
+                    label: 'Collections',
                   ),
                   AppDimens.badgeGap,
                   // temporary
                   _StatBadge(
-                    icon: Icons.folder_special,
-                    value: '3',
-                    label: 'Collections',
+                    icon: Icons.favorite,
+                    value: '48',
+                    label: 'Favorites',
                   ),
                 ],
               ),
