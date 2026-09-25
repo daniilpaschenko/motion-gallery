@@ -1,11 +1,12 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/error/failures.dart';
-import '../../domain/useCases/change_user_name_useCase.dart';
-import '../../domain/useCases/get_user_useCase.dart';
+import '../../domain/usecases/change_user_name_usecase.dart';
+import '../../domain/usecases/get_user_usecase.dart';
 import 'user_event.dart';
 import 'user_state.dart';
 
@@ -39,20 +40,38 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     final currentState = state;
     if (currentState is! UserLoaded || currentState.isChangingUserName) return;
 
+    final name = event.name.trim();
+    if (name.isEmpty) {
+      emit(currentState.copyWith(userNameError: 'Name cannot be empty'));
+      return;
+    }
+
     // "userNameError: null" – clears the previous error
     emit(currentState.copyWith(isChangingUserName: true, userNameError: null));
 
-    final result = await _changeUserNameUseCase(event.name);
-    await result.fold(
-      (failure) async {
-        emit(
-          currentState.copyWith(
-            isChangingUserName: false,
-            userNameError: _mapFailureToMessage(failure),
-          ),
+    final result = await _changeUserNameUseCase(name);
+    await result.fold<Future<void>>(
+      (failure) async => _emitNameChangeError(currentState, failure, emit),
+      (_) async {
+        final userResult = await _getUserUseCase();
+        userResult.fold(
+          (failure) => _emitNameChangeError(currentState, failure, emit),
+          (user) => emit(UserState.loaded(user: user)),
         );
       },
-      (_) async => _fetchAndEmitUser(emit),
+    );
+  }
+
+  void _emitNameChangeError(
+    UserLoaded currentState,
+    Failure failure,
+    Emitter<UserState> emit,
+  ) {
+    emit(
+      currentState.copyWith(
+        isChangingUserName: false,
+        userNameError: _mapFailureToMessage(failure),
+      ),
     );
   }
 
