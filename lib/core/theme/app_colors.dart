@@ -20,6 +20,7 @@ class AppColors {
   static final Color accentGlow = AppColors.primaryGradientEnd.withValues(alpha: 0.45);
   static const Color placeholderSurface = Color(0xFF222222);
   static const Color placeholderIcon = Colors.white54;
+  static const Color dialogBackground = Color(0xFF1C1B1E);
 
   // Surfaces & borders
   static final Color borderFaint = Colors.white.withValues(alpha: 0.08);
