@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_theme.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
@@ -14,22 +15,7 @@ class ProfileCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(cardPadding),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppDimens.cardRadius),
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [AppColors.cardSurfaceStart, AppColors.cardSurfaceEnd],
-        ),
-        border: Border.all(color: AppColors.borderFaint),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.cardShadow,
-            blurRadius: AppDimens.cardShadowBlur,
-            offset: AppDimens.cardShadowOffset,
-          ),
-        ],
-      ),
+      decoration: AppTheme.glassCardDecoration(),
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.center,
