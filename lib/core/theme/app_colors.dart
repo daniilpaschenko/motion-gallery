@@ -59,6 +59,13 @@ class AppColors {
   static final Color switchGlow = AppColors.primaryGradientEnd.withValues(alpha: 0.55);
   static const Color switchThumbShadow = Colors.black26;
 
+  // --- Bottom nav tokens (bottom_nav) ---
+  static final Color navBackground = const Color(0xFF0E0E0E).withValues(alpha: 0.90);
+  static const Color navInactive = Colors.white38;
+  static const Color navActive = AppColors.primaryGradientEnd;
+  static final Color navActiveGlow = AppColors.primaryGradientEnd.withValues(alpha: 0.80);
+  static const Color navActiveDotGlow = AppColors.primaryGradientEnd;
+
   // --- Danger tokens (danger_zone) ---
   static const Color danger = Color(0xFFF43F5E);
   static final Color dangerSurfaceStart = const Color(0xFF1C1316).withValues(alpha: 0.60);

@@ -102,6 +102,38 @@ class AppDimens {
   static const double rowSubtitleGap = 2.0;
   static const double rowDividerHeight = 1.0;
 
+  // --- Bottom nav (bottom_nav) ---
+  static double navHeight(BuildContext context) =>
+      MediaQuery.sizeOf(context).width > 600 ? 68.0 : 56.0;
+
+  static double navMaxWidth(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+    if (width > 1000) return 780.0;
+    if (width > 600) return 600.0;
+    return double.infinity;
+  }
+
+  static double navIconSize(BuildContext context) =>
+      MediaQuery.sizeOf(context).width > 1000
+    ? 28.0
+    : MediaQuery.sizeOf(context).width > 600
+        ? 26.0
+        : 22.0;
+
+  static double navFontSize(BuildContext context) =>
+      MediaQuery.sizeOf(context).width > 1000
+    ? 13.5
+    : MediaQuery.sizeOf(context).width > 600
+        ? 12.5
+        : 11.0;
+
+  static const double navBorderWidth = 1.0;
+  static const double navActiveIconGlowBlur = 8.0;
+  static const double navLabelGap = 2.0;
+  static const double navDotSize = 4.0;
+  static const double navDotMarginTop = 2.0;
+  static const double navDotGlowBlur = 6.0;
+
   // --- Switch (neon_switch) ---
   static const double switchWidth = 48.0;
   static const double switchHeight = 28.0;
