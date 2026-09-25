@@ -36,7 +36,12 @@ class AppDimens {
   static const double glowTop = -20.0;
   static const List<double> glowStops = [0.0, 0.55, 1.0];
 
-  static const double avatarSize = 96.0;
+  static double avatarSize(BuildContext context) =>
+      MediaQuery.sizeOf(context).width > 1000
+    ? 144.0
+    : MediaQuery.sizeOf(context).width > 600
+        ? 124.0
+        : 110.0;
   static const double avatarBorderWidth = 2.0;
   static const double avatarOuterPadding = 2.0;
   static const double avatarGlowBlur = 24.0;

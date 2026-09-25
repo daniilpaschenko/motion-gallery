@@ -11,6 +11,7 @@ class ProfileCard extends StatelessWidget {
     final cardPadding = AppDimens.cardPadding(context);
     final cardTitleFontSize = AppDimens.cardTitleFontSize(context);
     final detailFontSize = AppDimens.detailFontSize(context);
+    final avatarSize = AppDimens.avatarSize(context);
 
     return Container(
       width: double.infinity,
@@ -43,8 +44,8 @@ class ProfileCard extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    width: AppDimens.avatarSize,
-                    height: AppDimens.avatarSize,
+                    width: avatarSize,
+                    height: avatarSize,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
