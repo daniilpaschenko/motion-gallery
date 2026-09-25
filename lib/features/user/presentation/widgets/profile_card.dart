@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../blocs/user_bloc.dart';
+import '../blocs/user_state.dart';
+import 'edit_profile_dialog.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) => _buildCard(context, state),
+    );
+  }
+
+  Widget _buildCard(BuildContext context, UserState state) {
     final cardPadding = AppDimens.cardPadding(context);
     final cardTitleFontSize = AppDimens.cardTitleFontSize(context);
     final detailFontSize = AppDimens.detailFontSize(context);
     final avatarSize = AppDimens.avatarSize(context);
+    final isLoading = state is! UserLoaded;
+    final isChangingUserName = state is UserLoaded && state.isChangingUserName;
+    final userName = state is UserLoaded ? state.user.name : 'Motion User';
 
     return Container(
       width: double.infinity,
@@ -89,7 +103,7 @@ class ProfileCard extends StatelessWidget {
               ),
               AppDimens.cardGap,
               Text(
-                'Motion User',
+                userName,
                 style: TextStyle(
                   fontSize: cardTitleFontSize,
                   fontWeight: FontWeight.w700,
@@ -118,12 +132,25 @@ class ProfileCard extends StatelessWidget {
               ),
               AppDimens.cardSectionSpacer,
               OutlinedButton.icon(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.edit,
-                  size: AppDimens.editIconSize,
-                  color: AppColors.primaryGradientEnd,
-                ),
+                onPressed: isLoading || isChangingUserName
+                    ? null
+                    : () => EditProfileDialog.show(
+                        context,
+                        currentName: userName,
+                      ),
+                icon: isChangingUserName
+                    ? SizedBox.square(
+                        dimension: AppDimens.editIconSize,
+                        child: const CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColors.primaryGradientEnd,
+                        ),
+                      )
+                    : Icon(
+                        Icons.edit,
+                        size: AppDimens.editIconSize,
+                        color: AppColors.primaryGradientEnd,
+                      ),
                 label: Text(
                   'Edit Profile',
                   style: TextStyle(
