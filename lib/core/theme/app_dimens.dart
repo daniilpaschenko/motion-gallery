@@ -31,6 +31,12 @@ class AppDimens {
   static const titleSpacer = SizedBox(height: 10);
 
   // Card
+  static double profileCardMaxWidth(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+    if (width > 600) return 500.0;
+    return double.infinity;
+  }
+
   static const double cardRadius = 20.0;
   static const double cardShadowBlur = 32.0;
   static const Offset cardShadowOffset = Offset(0, 8);
