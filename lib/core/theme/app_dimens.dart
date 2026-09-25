@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 class AppDimens {
   static double horizontalPadding(BuildContext context) =>
-      MediaQuery.of(context).size.width > 600 ? 80.0 : 20.0;
+        MediaQuery.sizeOf(context).width > 1000
+    ? 300.0
+    : MediaQuery.sizeOf(context).width > 600
+        ? 80.0
+        : 20.0;
 
   static double titleFontSize(BuildContext context) =>
       MediaQuery.of(context).size.width > 600 ? 24.0 : 20.0;
