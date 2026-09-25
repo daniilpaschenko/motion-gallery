@@ -1,10 +1,12 @@
 import 'package:drift/drift.dart';
+import 'package:injectable/injectable.dart';
 
 import '../app_database.dart';
 import '../tables/users_table.dart';
 
 part 'user_dao.g.dart';
 
+@injectable
 @DriftAccessor(tables: [Users]) // "this dao works with users table"
 class UserDao extends DatabaseAccessor<AppDatabase> with _$UserDaoMixin {
   UserDao(super.db);
