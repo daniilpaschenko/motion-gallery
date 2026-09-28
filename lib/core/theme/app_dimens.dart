@@ -83,6 +83,21 @@ class AppDimens {
   static const double editIconSize = 17.0;
   static const double pillRadius = 999.0;
 
+  static const double dialogMaxWidth = 600.0;
+  static const double dialogFieldRadius = 15.0;
+  static const EdgeInsets dialogFieldPadding = EdgeInsets.symmetric(
+    horizontal: 16.0,
+    vertical: 14.0,
+  );
+  static const double dialogButtonHPadding = 35.0;
+  static const double dialogButtonVPadding = 15.0;
+  static const double dialogProgressSize = 23.0;
+  static const double dialogPadding = 25.0;
+  static const int dialogNameMaxLength = 16;
+
+  static double dialogTextFontSize(BuildContext context) =>
+      MediaQuery.sizeOf(context).width > 600 ? 16.0 : 13.5;
+
   static double verticalPaddingTop(BuildContext context) =>
       MediaQuery.of(context).size.width > 600 ? 36.0 : 24.0;
 

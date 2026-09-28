@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../blocs/user_bloc.dart';
+import '../blocs/user_state.dart';
+import 'edit_profile_dialog.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) => _buildCard(context, state),
+    );
+  }
+
+  Widget _buildCard(BuildContext context, UserState state) {
     final cardPadding = AppDimens.cardPadding(context);
     final cardTitleFontSize = AppDimens.cardTitleFontSize(context);
     final detailFontSize = AppDimens.detailFontSize(context);
     final avatarSize = AppDimens.avatarSize(context);
+    final isLoading = state is! UserLoaded;
+    final isChangingUserName = state is UserLoaded && state.isChangingUserName;
+    final userName = state is UserLoaded ? state.user.name : 'Motion User';
 
     return Container(
       width: double.infinity,
@@ -71,17 +85,10 @@ class ProfileCard extends StatelessWidget {
                     padding: const EdgeInsets.all(AppDimens.avatarOuterPadding),
                     child: ClipOval(
                       // temporary
-                      child: Image.network(
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuD3Kj74NO7Qrhg4GoU4suY5-orSr3CE1MUU3zjMYmifV9s_IkTDoC7c1ywl-qkKrJiZV6I7NnNn_opITji9mlG8MddGjfeMudi-KztYOD-zT118tRuizEZkXgdybvC1D9BePcD4YJQC33l1ZvcKxE1ztxA5E_uSPRA3LhjHx1K1Jalpnbh2_yOWjE42wBnEkk2eR81BD35Q0nDbVEcmThwa_xQJQYgg72aghFMnOr5L2DyE5qvQ9rvG7Q',
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, _, _) => Container(
-                          color: AppColors.placeholderSurface,
-                          child: Icon(
-                            Icons.person,
-                            size: AppDimens.placeholderIconSize,
-                            color: AppColors.placeholderIcon,
-                          ),
-                        ),
+                      child: Icon(
+                        Icons.person,
+                        size: AppDimens.placeholderIconSize,
+                        color: AppColors.placeholderIcon,
                       ),
                     ),
                   ),
@@ -89,7 +96,7 @@ class ProfileCard extends StatelessWidget {
               ),
               AppDimens.cardGap,
               Text(
-                'Motion User',
+                userName,
                 style: TextStyle(
                   fontSize: cardTitleFontSize,
                   fontWeight: FontWeight.w700,
@@ -118,14 +125,27 @@ class ProfileCard extends StatelessWidget {
               ),
               AppDimens.cardSectionSpacer,
               OutlinedButton.icon(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.edit,
-                  size: AppDimens.editIconSize,
-                  color: AppColors.primaryGradientEnd,
-                ),
+                onPressed: isLoading || isChangingUserName
+                    ? null
+                    : () => EditProfileDialog.show(
+                        context,
+                        currentName: userName,
+                      ),
+                icon: isChangingUserName
+                    ? SizedBox.square(
+                        dimension: AppDimens.editIconSize,
+                        child: const CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColors.primaryGradientEnd,
+                        ),
+                      )
+                    : Icon(
+                        Icons.edit,
+                        size: AppDimens.editIconSize,
+                        color: AppColors.primaryGradientEnd,
+                      ),
                 label: Text(
-                  'Edit Profile',
+                  'Edit Name',
                   style: TextStyle(
                     fontSize: detailFontSize,
                     fontWeight: FontWeight.w600,

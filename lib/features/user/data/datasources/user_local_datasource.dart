@@ -12,39 +12,38 @@ abstract class UserLocalDataSource {
 class UserLocalDataSourceImpl implements UserLocalDataSource {
   final UserDao _userDao;
 
+  static const String _localUserId = 'local_user';
+
   UserLocalDataSourceImpl(this._userDao);
 
   @override
   Future<User> getUser() async {
     try {
-      final userData = await _userDao.getUser();
+      var userData = await _userDao.getUser();
 
       if (userData == null) {
-        throw CacheException();
+        await _userDao.createUser(id: _localUserId, name: 'Motion User');
+        userData = await _userDao.getUser();
+        if (userData == null) {
+          throw CacheException('User was not created');
+        }
       }
 
-      // drift-model -> model
-      return User(
-        id: userData.id,
-        name: userData.name,
-      );
+      return User(id: userData.id, name: userData.name);
     } catch (e) {
-      throw CacheException();
+      if (e is CacheException) rethrow;
+      throw CacheException(e.toString());
     }
   }
 
   @override
   Future<void> changeUserName({required String name}) async {
     try {
-      final currentUser = await _userDao.getUser();
-
-      if (currentUser == null) {
-        throw CacheException();
-      }
-
-      await _userDao.updateUserName(currentUser.id, name);
+      final user = await getUser();
+      await _userDao.updateUserName(user.id, name);
     } catch (e) {
-      throw CacheException();
+      if (e is CacheException) rethrow;
+      throw CacheException(e.toString());
     }
   }
 }
