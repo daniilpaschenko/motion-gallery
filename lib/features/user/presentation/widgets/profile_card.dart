@@ -85,17 +85,10 @@ class ProfileCard extends StatelessWidget {
                     padding: const EdgeInsets.all(AppDimens.avatarOuterPadding),
                     child: ClipOval(
                       // temporary
-                      child: Image.network(
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuD3Kj74NO7Qrhg4GoU4suY5-orSr3CE1MUU3zjMYmifV9s_IkTDoC7c1ywl-qkKrJiZV6I7NnNn_opITji9mlG8MddGjfeMudi-KztYOD-zT118tRuizEZkXgdybvC1D9BePcD4YJQC33l1ZvcKxE1ztxA5E_uSPRA3LhjHx1K1Jalpnbh2_yOWjE42wBnEkk2eR81BD35Q0nDbVEcmThwa_xQJQYgg72aghFMnOr5L2DyE5qvQ9rvG7Q',
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, _, _) => Container(
-                          color: AppColors.placeholderSurface,
-                          child: Icon(
-                            Icons.person,
-                            size: AppDimens.placeholderIconSize,
-                            color: AppColors.placeholderIcon,
-                          ),
-                        ),
+                      child: Icon(
+                        Icons.person,
+                        size: AppDimens.placeholderIconSize,
+                        color: AppColors.placeholderIcon,
                       ),
                     ),
                   ),
