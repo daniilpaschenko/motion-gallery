@@ -88,7 +88,7 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
           actionsPadding: const EdgeInsets.all(AppDimens.dialogPadding),
           actionsAlignment: MainAxisAlignment.center,
           title: Text(
-            'Edit profile',
+            'Edit name',
             style: TextStyle(
               fontSize: titleFontSize,
               fontWeight: FontWeight.w700,
@@ -130,7 +130,6 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                       color: Colors.white,
                     ),
                     decoration: InputDecoration(
-                      labelText: 'Name',
                       hintText: widget.initialName,
                       labelStyle: TextStyle(
                         fontSize: textFontSize,

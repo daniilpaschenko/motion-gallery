@@ -145,7 +145,7 @@ class ProfileCard extends StatelessWidget {
                         color: AppColors.primaryGradientEnd,
                       ),
                 label: Text(
-                  'Edit Profile',
+                  'Edit Name',
                   style: TextStyle(
                     fontSize: detailFontSize,
                     fontWeight: FontWeight.w600,
